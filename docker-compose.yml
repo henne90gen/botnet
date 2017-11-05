@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+  simple:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - BOT=simple
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'
+
+  steam:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - BOT=steam
+    ports:
+      - '8081:8081'
+    expose:
+      - '8081'
+  wikipedia:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - BOT=wikipedia
+    ports:
+      - '8082:8082'
+    expose:
+      - '8082'
