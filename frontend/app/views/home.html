@@ -1,0 +1,10 @@
+<h3>Ask a question</h3>
+<form ng-submit="$ctrl.ask()">
+    <input ng-model="$ctrl.question">
+    <!--<button ng-click="$ctrl.ask()">Ask</button>-->
+</form>
+<table>
+    <tr ng-repeat="answer in $ctrl.answers">
+        <td>{{answer}}</td>
+    </tr>
+</table>

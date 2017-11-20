@@ -9,14 +9,14 @@ address = 'http://wikipedia'
 log = getLogger(bot_name)
 
 
-def answer(question: str) -> str:
+def answer(question: str) -> list:
     url = "https://en.wikipedia.org/w/api.php"
     parameters = {'action': 'query', 'format': 'json', 'list': 'search', 'srsearch': question}
     response = requests.get(url, params=parameters)
     results = []
     for elem in response.json()['query']['search']:
         results.append(elem['title'] + ": " + elem['snippet'])
-    return '\n'.join(results)
+    return results
 
 
 def main():

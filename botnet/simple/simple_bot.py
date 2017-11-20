@@ -7,9 +7,9 @@ address = 'http://simple'
 log = getLogger(bot_name)
 
 
-def answer(question: str) -> str:
+def answer(question: str) -> list:
     log.info(question)
-    return ""
+    return []
 
 
 def main():

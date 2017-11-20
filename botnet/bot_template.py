@@ -71,7 +71,7 @@ class Bot:
             log.debug("Answers: " + pformat(answers))
             return answers
 
-    def __init__(self, name: str, local_answer_func: Callable[[str], str], address: str,
+    def __init__(self, name: str, local_answer_func: Callable[[str], list], address: str,
                  port: int = -1):
         global answer_func
         answer_func = local_answer_func
@@ -100,6 +100,15 @@ class Bot:
         self.api = Api(self.app)
         self.api.add_resource(Bot.Ping, '/ping', resource_class_kwargs={'bot': self})
         self.api.add_resource(Bot.Question, '/question', resource_class_kwargs={'bot': self})
+
+        @self.app.after_request
+        def after_request(response):
+            # this is necessary for different origin requests
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+            response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+            return response
+
         self.all_peers = load_peers(self.peers_path)
         self.online_peers = self.all_peers.copy()
 
