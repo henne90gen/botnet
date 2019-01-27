@@ -1,16 +1,16 @@
 export default function HomeController($scope, AnswerService) {
-
     this.question = "";
     this.answers = [""];
 
-    this.ask = function () {
+    this.ask = function() {
         AnswerService.ask(this.question).then(response => {
+            this.answers = [];
             for (let arr of response) {
                 for (let elem of arr) {
                     this.answers.push(elem);
                 }
             }
-            $scope.$apply()
-        })
-    }
+            $scope.$apply();
+        });
+    };
 }
